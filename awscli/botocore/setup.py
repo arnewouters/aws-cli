@@ -40,7 +40,7 @@ setup(
     name='botocore',
     version=find_version("", "__init__.py"),
     description='Low-level, data-driven core of boto 3.',
-    long_description=open('README.rst').read(),
+    long_description='',
     author='Amazon Web Services',
     url='https://github.com/boto/botocore',
     scripts=[],
