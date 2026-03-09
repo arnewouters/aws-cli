@@ -17,7 +17,7 @@ import threading
 from collections import namedtuple
 from concurrent import futures
 
-from botocore.context import get_context
+from awscli.botocore.context import get_context
 from s3transfer.compat import MAXINT
 from s3transfer.exceptions import CancelledError, TransferNotDoneError
 from s3transfer.utils import FunctionContainer, TaskSemaphore

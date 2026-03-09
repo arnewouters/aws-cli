@@ -13,8 +13,8 @@
 import logging
 
 import awscrt.s3
-from botocore.client import Config
-from botocore.httpsession import DEFAULT_CA_BUNDLE
+from awscli.botocore.client import Config
+from awscli.botocore.httpsession import DEFAULT_CA_BUNDLE
 from s3transfer.crt import (
     BotocoreCRTCredentialsWrapper,
     BotocoreCRTRequestSerializer,

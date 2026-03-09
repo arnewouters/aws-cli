@@ -18,9 +18,9 @@ import os
 import re
 import sys
 
-from botocore.auth import SigV4Auth
-from botocore.awsrequest import AWSRequest
-from botocore.compat import urlsplit
+from awscli.botocore.auth import SigV4Auth
+from awscli.botocore.awsrequest import AWSRequest
+from awscli.botocore.compat import urlsplit
 
 from awscli.compat import NonTranslatedStdout
 from awscli.customizations.commands import BasicCommand

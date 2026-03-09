@@ -15,17 +15,17 @@
 import logging
 import sys
 
-from botocore import (
+from . import (
     ScalarTypes,  # noqa
     parsers,
 )
-from botocore.compat import (
+from .compat import (
     XMLParseError,  # noqa
     json,  # noqa
     set_socket_timeout,
 )
-from botocore.exceptions import IncompleteReadError, ReadTimeoutError
-from botocore.hooks import first_non_none_response  # noqa
+from .exceptions import IncompleteReadError, ReadTimeoutError
+from .hooks import first_non_none_response  # noqa
 from urllib3.exceptions import ReadTimeoutError as URLLib3ReadTimeoutError
 
 logger = logging.getLogger(__name__)

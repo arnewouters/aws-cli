@@ -19,15 +19,15 @@ from datetime import datetime, timedelta
 from typing import Optional
 
 import dateutil.parser
-from botocore import UNSIGNED
-from botocore.compat import total_seconds
-from botocore.config import Config
-from botocore.exceptions import (
+from . import UNSIGNED
+from .compat import total_seconds
+from .config import Config
+from .exceptions import (
     ClientError,
     InvalidConfigError,
     TokenRetrievalError,
 )
-from botocore.utils import (
+from .utils import (
     CachedProperty,
     JSONFileCache,
     SSOTokenLoader,

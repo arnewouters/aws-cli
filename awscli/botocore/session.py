@@ -24,11 +24,14 @@ import re
 import socket
 import warnings
 
-import botocore.client
-import botocore.configloader
-import botocore.credentials
-import botocore.tokens
-from botocore import (
+from . import client
+from . import configloader
+from .credentials import (
+    Credentials,
+    create_credential_resolver,
+)
+from . import tokens
+from . import (
     UNSIGNED,
     __version__,
     handlers,
@@ -37,28 +40,28 @@ from botocore import (
     utils,
     waiter,
 )
-from botocore.compat import MutableMapping
-from botocore.configprovider import (
+from .compat import MutableMapping
+from .configprovider import (
     BOTOCORE_DEFAUT_SESSION_VARIABLES,
     ConfigChainFactory,
     ConfiguredEndpointProvider,
     ConfigValueStore,
     create_botocore_default_config_mapping,
 )
-from botocore.context import get_context, with_current_context
-from botocore.errorfactory import ClientExceptionsFactory
-from botocore.exceptions import (
+from .context import get_context, with_current_context
+from .errorfactory import ClientExceptionsFactory
+from .exceptions import (
     ConfigNotFound,
     PartialCredentialsError,
     ProfileNotFound,
     UnknownServiceError,
 )
-from botocore.hooks import HierarchicalEmitter, first_non_none_response
-from botocore.loaders import create_loader
-from botocore.model import ServiceModel
-from botocore.parsers import ResponseParserFactory
-from botocore.regions import EndpointResolver
-from botocore.useragent import UserAgentString, register_feature_id
+from .hooks import HierarchicalEmitter, first_non_none_response
+from .loaders import create_loader
+from .model import ServiceModel
+from .parsers import ResponseParserFactory
+from .regions import EndpointResolver
+from .useragent import UserAgentString, register_feature_id
 
 logger = logging.getLogger(__name__)
 
@@ -162,7 +165,7 @@ class Session:
         )
 
     def _create_token_resolver(self):
-        return botocore.tokens.create_token_resolver(self)
+        return tokens.create_token_resolver(self)
 
     def _register_credential_provider(self):
         self._components.lazy_register_component(
@@ -170,7 +173,7 @@ class Session:
         )
 
     def _create_credential_resolver(self):
-        return botocore.credentials.create_credential_resolver(
+        return create_credential_resolver(
             self, region_name=self._last_client_region_used
         )
 
@@ -393,7 +396,7 @@ class Session:
         if self._config is None:
             try:
                 config_file = self.get_config_variable('config_file')
-                self._config = botocore.configloader.load_config(config_file)
+                self._config = configloader.load_config(config_file)
             except ConfigNotFound:
                 self._config = {'profiles': {}}
             try:
@@ -403,7 +406,7 @@ class Session:
                 # can validate the user is not referring to a nonexistent
                 # profile.
                 cred_file = self.get_config_variable('credentials_file')
-                cred_profiles = botocore.configloader.raw_config_parse(
+                cred_profiles = configloader.raw_config_parse(
                     cred_file
                 )
                 for profile in cred_profiles:
@@ -419,7 +422,7 @@ class Session:
     def get_default_client_config(self):
         """Retrieves the default config for creating clients
 
-        :rtype: botocore.client.Config
+        :rtype: client.Config
         :returns: The default client config object when creating clients. If
             the value is ``None`` then there is no default config object
             attached to the session.
@@ -429,7 +432,7 @@ class Session:
     def set_default_client_config(self, client_config):
         """Sets the default config for creating clients
 
-        :type client_config: botocore.client.Config
+        :type client_config: client.Config
         :param client_config: The default client config object when creating
             clients. If the value is ``None`` then there is no default config
             object attached to the session.
@@ -458,7 +461,7 @@ class Session:
         :type account_id: str
         :param account_id: An optional account ID part of the credentials.
         """
-        self._credentials = botocore.credentials.Credentials(
+        self._credentials = Credentials(
             access_key, secret_key, token, account_id=account_id
         )
 
@@ -479,7 +482,7 @@ class Session:
 
     def get_auth_token(self, **kwargs):
         """
-        Return the :class:`botocore.tokens.AuthToken` object associated with
+        Return the :class:`tokens.AuthToken` object associated with
         this session. If the authorization token has not yet been loaded, this
         will attempt to load it. If it has already been loaded, this will
         return the cached authorization token.
@@ -849,7 +852,7 @@ class Session:
         :param aws_session_token: The session token to use when creating
             the client.  Same semantics as aws_access_key_id above.
 
-        :type config: botocore.client.Config
+        :type config: client.Config
         :param config: Advanced client configuration options. If a value
             is specified in the client config, its value will take precedence
             over environment variables and configuration values, but not over
@@ -862,7 +865,7 @@ class Session:
         :param aws_account_id: The account id to use when creating
             the client.  Same semantics as aws_access_key_id above.
 
-        :rtype: botocore.client.BaseClient
+        :rtype: client.BaseClient
         :return: A botocore client instance
 
         """
@@ -891,7 +894,7 @@ class Session:
         elif (
             aws_access_key_id is not None and aws_secret_access_key is not None
         ):
-            credentials = botocore.credentials.Credentials(
+            credentials = Credentials(
                 access_key=aws_access_key_id,
                 secret_key=aws_secret_access_key,
                 token=aws_session_token,
@@ -935,7 +938,7 @@ class Session:
 
         user_agent_creator.set_client_features(get_context().features)
 
-        client_creator = botocore.client.ClientCreator(
+        client_creator = client.ClientCreator(
             loader,
             endpoint_resolver,
             self.user_agent(),

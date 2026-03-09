@@ -12,9 +12,9 @@
 # language governing permissions and limitations under the License.
 import copy
 
-from botocore.compat import OrderedDict
-from botocore.endpoint import DEFAULT_TIMEOUT, MAX_POOL_CONNECTIONS
-from botocore.exceptions import (
+from .compat import OrderedDict
+from .endpoint import DEFAULT_TIMEOUT, MAX_POOL_CONNECTIONS
+from .exceptions import (
     InvalidMaxRetryAttemptsError,
     InvalidRetryConfigurationError,
     InvalidRetryModeError,

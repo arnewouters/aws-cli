@@ -105,10 +105,10 @@ which don't represent the actual service api.
 import logging
 import os
 
-from botocore import BOTOCORE_ROOT
-from botocore.compat import OrderedDict, json
-from botocore.exceptions import DataNotFoundError, UnknownServiceError
-from botocore.utils import deep_merge
+from . import BOTOCORE_ROOT
+from .compat import OrderedDict, json
+from .exceptions import DataNotFoundError, UnknownServiceError
+from .utils import deep_merge
 
 logger = logging.getLogger(__name__)
 

@@ -15,14 +15,14 @@
 from collections import defaultdict
 from typing import NamedTuple, Union
 
-from botocore.auth import resolve_auth_type
-from botocore.compat import OrderedDict
-from botocore.exceptions import (
+from .auth import resolve_auth_type
+from .compat import OrderedDict
+from .exceptions import (
     MissingServiceIdError,
     UndefinedModelAttributeError,
     UnsupportedServiceProtocolsError,
 )
-from botocore.utils import (
+from .utils import (
     PRIORITY_ORDERED_SUPPORTED_PROTOCOLS,
     CachedProperty,
     hyphenize_service_id,

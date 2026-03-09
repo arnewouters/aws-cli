@@ -15,7 +15,7 @@ import json
 import logging
 import sys
 
-import botocore
+import awscli.botocore as botocore
 
 from awscli.customizations.commands import BasicCommand
 from awscli.customizations.emrcontainers.base36 import Base36

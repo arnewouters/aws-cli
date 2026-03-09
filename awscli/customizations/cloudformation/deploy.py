@@ -17,7 +17,7 @@ import logging
 import os
 import sys
 
-from botocore.client import Config
+from awscli.botocore.client import Config
 
 from awscli.compat import compat_open, get_stdout_text_writer
 from awscli.customizations.cloudformation import exceptions

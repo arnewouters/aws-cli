@@ -23,10 +23,10 @@ import re
 from enum import Enum
 
 import jmespath
-from botocore import UNSIGNED, xform_name
-from botocore.auth import AUTH_TYPE_MAPS
-from botocore.endpoint_provider import EndpointProvider
-from botocore.exceptions import (
+from . import UNSIGNED, xform_name
+from .auth import AUTH_TYPE_MAPS
+from .endpoint_provider import EndpointProvider
+from .exceptions import (
     EndpointProviderError,
     EndpointVariantError,
     InvalidEndpointConfigurationError,
@@ -41,8 +41,8 @@ from botocore.exceptions import (
     UnsupportedS3ControlArnError,
     UnsupportedS3ControlConfigurationError,
 )
-from botocore.useragent import register_feature_id
-from botocore.utils import ensure_boolean, instance_cache
+from .useragent import register_feature_id
+from .utils import ensure_boolean, instance_cache
 
 LOG = logging.getLogger(__name__)
 DEFAULT_URI_TEMPLATE = '{service}.{region}.{dnsSuffix}'  # noqa

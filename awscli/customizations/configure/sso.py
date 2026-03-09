@@ -18,11 +18,11 @@ import os
 import re
 
 import colorama
-from botocore import UNSIGNED
-from botocore.config import Config
-from botocore.configprovider import ConstantProvider
-from botocore.exceptions import ProfileNotFound
-from botocore.utils import is_valid_endpoint_url
+from awscli.botocore import UNSIGNED
+from awscli.botocore.config import Config
+from awscli.botocore.configprovider import ConstantProvider
+from awscli.botocore.exceptions import ProfileNotFound
+from awscli.botocore.utils import is_valid_endpoint_url
 from prompt_toolkit import prompt as ptk_prompt
 from prompt_toolkit.application import get_app
 from prompt_toolkit.completion import WordCompleter

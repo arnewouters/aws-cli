@@ -17,7 +17,7 @@ import sys
 import time
 from datetime import datetime
 
-import botocore
+import awscli.botocore as botocore
 
 from awscli.customizations.cloudformation import exceptions
 from awscli.customizations.cloudformation.artifact_exporter import (

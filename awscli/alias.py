@@ -15,7 +15,7 @@ import os
 import shlex
 import subprocess
 
-from botocore.configloader import raw_config_parse
+from awscli.botocore.configloader import raw_config_parse
 
 from awscli.commands import CLICommand
 from awscli.compat import compat_shell_quote

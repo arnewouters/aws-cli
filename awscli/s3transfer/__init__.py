@@ -136,9 +136,9 @@ import string
 import threading
 
 import s3transfer.compat
-from botocore.compat import six  # noqa: F401
-from botocore.exceptions import IncompleteReadError
-from botocore.vendored.requests.packages.urllib3.exceptions import (
+from awscli.botocore.compat import six  # noqa: F401
+from awscli.botocore.exceptions import IncompleteReadError
+from awscli.botocore.vendored.requests.packages.urllib3.exceptions import (
     ReadTimeoutError,
 )
 from s3transfer.exceptions import RetriesExceededError, S3UploadFailedError

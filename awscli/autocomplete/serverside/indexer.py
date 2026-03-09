@@ -12,8 +12,8 @@
 # language governing permissions and limitations under the License.
 import json
 
-from botocore import xform_name
-from botocore.exceptions import UnknownServiceError
+from awscli.botocore import xform_name
+from awscli.botocore.exceptions import UnknownServiceError
 
 import awscli.clidriver
 from awscli.autocomplete.db import DatabaseConnection

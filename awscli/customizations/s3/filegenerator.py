@@ -14,7 +14,7 @@ import os
 import stat
 import sys
 
-from botocore.exceptions import ClientError
+from awscli.botocore.exceptions import ClientError
 from dateutil.parser import parse
 from dateutil.tz import tzlocal
 

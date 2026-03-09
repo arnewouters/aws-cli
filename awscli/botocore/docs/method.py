@@ -13,11 +13,11 @@
 import inspect
 import types
 
-from botocore.docs.example import (
+from .example import (
     RequestExampleDocumenter,
     ResponseExampleDocumenter,
 )
-from botocore.docs.params import (
+from .params import (
     RequestParamsDocumenter,
     ResponseParamsDocumenter,
 )

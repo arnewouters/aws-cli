@@ -12,16 +12,16 @@
 # language governing permissions and limitations under the License.
 import inspect
 
-from botocore.compat import OrderedDict
-from botocore.docs.example import ResponseExampleDocumenter
-from botocore.docs.method import (
+from ..compat import OrderedDict
+from .example import ResponseExampleDocumenter
+from .method import (
     document_custom_method,
     document_model_driven_method,
     get_instance_public_methods,
 )
-from botocore.docs.params import ResponseParamsDocumenter
-from botocore.docs.sharedexample import document_shared_examples
-from botocore.docs.utils import DocumentedShape, get_official_service_name
+from .params import ResponseParamsDocumenter
+from .sharedexample import document_shared_examples
+from .utils import DocumentedShape, get_official_service_name
 
 
 class ClientDocumenter:

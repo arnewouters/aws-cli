@@ -15,7 +15,7 @@ import logging
 import os
 import time
 
-from botocore.utils import percent_encode_sequence
+from awscli.botocore.utils import percent_encode_sequence
 from s3transfer.subscribers import BaseSubscriber
 
 from awscli.customizations.s3 import utils

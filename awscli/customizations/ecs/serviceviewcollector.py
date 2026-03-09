@@ -20,7 +20,7 @@ ECS Express Gateway Service monitoring data.
 import time
 from functools import reduce
 
-from botocore.exceptions import ClientError
+from awscli.botocore.exceptions import ClientError
 
 from awscli.customizations.ecs.exceptions import MonitoringError
 from awscli.customizations.ecs.expressgateway.managedresource import (

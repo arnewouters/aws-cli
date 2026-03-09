@@ -15,7 +15,7 @@ import logging
 import os
 
 from awscrt.crypto import RSA, RSASignatureAlgorithm
-from botocore import model
+from awscli.botocore import model
 
 from awscli.arguments import BaseCLIArgument
 

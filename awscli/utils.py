@@ -21,9 +21,9 @@ import signal
 import sys
 from subprocess import PIPE, Popen
 
-from botocore.configprovider import BaseProvider
-from botocore.useragent import UserAgentComponent
-from botocore.utils import (
+from awscli.botocore.configprovider import BaseProvider
+from awscli.botocore.useragent import UserAgentComponent
+from awscli.botocore.utils import (
     BadIMDSRequestError,
     IMDSFetcher,
     original_ld_library_path,

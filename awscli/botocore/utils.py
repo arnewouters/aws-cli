@@ -35,12 +35,10 @@ from ipaddress import ip_address
 from pathlib import Path
 from urllib.request import getproxies, proxy_bypass
 
-import botocore
-import botocore.awsrequest
-import botocore.httpsession
+from . import UNSIGNED, awsrequest, httpsession
 import dateutil.parser
 from awscrt.crypto import EC
-from botocore.compat import (
+from .compat import (
     MD5_AVAILABLE,
     get_md5,
     get_tzinfo_options,
@@ -52,7 +50,7 @@ from botocore.compat import (
     urlunsplit,
     zip_longest,
 )
-from botocore.exceptions import (
+from .exceptions import (
     AuthorizationCodeLoadError,
     ClientError,
     ConfigNotFound,
@@ -210,7 +208,7 @@ def has_header(header_name, headers):
     """Case-insensitive check for header key."""
     if header_name is None:
         return False
-    elif isinstance(headers, botocore.awsrequest.HeadersDict):
+    elif isinstance(headers, awsrequest.HeadersDict):
         return header_name in headers
     else:
         return header_name.lower() in [key.lower() for key in headers.keys()]
@@ -362,7 +360,7 @@ class IMDSFetcher:
         )
         self._imds_v1_disabled = config.get('ec2_metadata_v1_disabled')
         self._user_agent = user_agent
-        self._session = botocore.httpsession.URLLib3Session(
+        self._session = httpsession.URLLib3Session(
             timeout=self._timeout,
             proxies=get_environ_proxies(self._base_url),
         )
@@ -411,7 +409,7 @@ class IMDSFetcher:
             'x-aws-ec2-metadata-token-ttl-seconds': self._TOKEN_TTL,
         }
         self._add_user_agent(headers)
-        request = botocore.awsrequest.AWSRequest(
+        request = awsrequest.AWSRequest(
             method='PUT', url=url, headers=headers
         )
         for i in range(self._num_attempts):
@@ -468,7 +466,7 @@ class IMDSFetcher:
         self._add_user_agent(headers)
         for i in range(self._num_attempts):
             try:
-                request = botocore.awsrequest.AWSRequest(
+                request = awsrequest.AWSRequest(
                     method='GET', url=url, headers=headers
                 )
                 response = self._session.send(request.prepare())
@@ -2897,7 +2895,7 @@ class ContainerMetadataFetcher:
 
     def __init__(self, session=None, sleep=time.sleep):
         if session is None:
-            session = botocore.httpsession.URLLib3Session(
+            session = httpsession.URLLib3Session(
                 timeout=self.TIMEOUT_SECONDS
             )
         self._session = session
@@ -2916,7 +2914,7 @@ class ContainerMetadataFetcher:
         return self._retrieve_credentials(full_url, headers)
 
     def _validate_allowed_url(self, full_url):
-        parsed = botocore.compat.urlparse(full_url)
+        parsed = urlparse(full_url)
 
         if parsed.scheme == 'https':
             return
@@ -2977,7 +2975,7 @@ class ContainerMetadataFetcher:
 
     def _get_response(self, full_url, headers, timeout):
         try:
-            AWSRequest = botocore.awsrequest.AWSRequest
+            AWSRequest = awsrequest.AWSRequest
             request = AWSRequest(method='GET', url=full_url, headers=headers)
             response = self._session.send(request.prepare())
             response_text = response.content.decode('utf-8')
@@ -3270,9 +3268,11 @@ class BaseSSOTokenFetcher:
 
     @CachedProperty
     def _client(self):
-        config = botocore.config.Config(
+        from .config import Config
+
+        config = Config(
             region_name=self._sso_region,
-            signature_version=botocore.UNSIGNED,
+            signature_version=UNSIGNED,
             user_agent_extra=self._USER_AGENT_EXTRA,
         )
         return self._client_creator(
@@ -3622,7 +3622,7 @@ class SSOTokenFetcherAuth(BaseSSOTokenFetcher):
             self._base_endpoint = f'{parsed.scheme}://{parsed.netloc}'
 
         # Return a tuple containing the "response" to short-circuit the request
-        return botocore.awsrequest.AWSResponse(None, 200, {}, None), {}
+        return awsrequest.AWSResponse(None, 200, {}, None), {}
 
     def _get_base_authorization_uri(self):
         """Simulates an SSO-OIDC request so that we can extract the "base"
@@ -3980,7 +3980,7 @@ def _extract_resolved_endpoint(params, result=None, **kwargs):
         parsed = urlparse(params['url'])
         result['uri'] = f'{parsed.scheme}://{parsed.netloc}'
 
-    return botocore.awsrequest.AWSResponse(None, 200, {}, None), {}
+    return awsrequest.AWSResponse(None, 200, {}, None), {}
 
 
 def get_base_sign_in_uri(client):

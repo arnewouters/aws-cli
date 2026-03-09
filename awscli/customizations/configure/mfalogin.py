@@ -17,8 +17,8 @@ import string
 import sys
 
 # Import botocore at module level to avoid repeated imports
-import botocore.session
-from botocore.exceptions import ClientError, ProfileNotFound
+from awscli.botocore.session import Session as BotocoreSession
+from awscli.botocore.exceptions import ClientError, ProfileNotFound
 
 from awscli.compat import compat_input
 from awscli.customizations.commands import BasicCommand
@@ -261,7 +261,7 @@ class ConfigureMFALoginCommand(BasicCommand):
         target_profile = self._get_target_profile(parsed_args, values['mfa_serial'])
 
         # Create STS client with the provided credentials
-        session = botocore.session.Session()
+        session = BotocoreSession()
         sts_client = session.create_client(
             'sts',
             aws_access_key_id=values['aws_access_key_id'],

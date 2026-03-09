@@ -20,13 +20,13 @@ import webbrowser
 from functools import partial
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-from botocore.compat import parse_qs, urlparse
-from botocore.credentials import JSONFileCache
-from botocore.exceptions import (
+from awscli.botocore.compat import parse_qs, urlparse
+from awscli.botocore.credentials import JSONFileCache
+from awscli.botocore.exceptions import (
     AuthCodeFetcherError,
     PendingAuthorizationExpiredError,
 )
-from botocore.utils import (
+from awscli.botocore.utils import (
     SSOTokenFetcher,
     SSOTokenFetcherAuth,
     original_ld_library_path,

@@ -10,7 +10,7 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
-from botocore.exceptions import ProfileNotFound
+from awscli.botocore.exceptions import ProfileNotFound
 
 from awscli.autocomplete.filters import fuzzy_filter
 from awscli.autocomplete.main import create_autocompleter

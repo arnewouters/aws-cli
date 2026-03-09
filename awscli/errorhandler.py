@@ -14,12 +14,12 @@ import argparse
 import logging
 import signal
 
-from botocore.exceptions import (
+from awscli.botocore.exceptions import (
     ClientError,
     NoCredentialsError,
     NoRegionError,
 )
-from botocore.exceptions import (
+from awscli.botocore.exceptions import (
     ParamValidationError as BotocoreParamValidationError,
 )
 

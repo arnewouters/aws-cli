@@ -4,7 +4,7 @@ import logging
 import os
 import sys
 
-from botocore.utils import (
+from awscli.botocore.utils import (
     generate_login_cache_key,
     get_login_token_cache_directory,
 )

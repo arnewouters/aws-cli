@@ -21,9 +21,9 @@ import string
 import threading
 from collections import defaultdict
 
-from botocore.exceptions import IncompleteReadError, ReadTimeoutError
-from botocore.httpchecksum import DEFAULT_CHECKSUM_ALGORITHM, AwsChunkedWrapper
-from botocore.utils import is_s3express_bucket
+from awscli.botocore.exceptions import IncompleteReadError, ReadTimeoutError
+from awscli.botocore.httpchecksum import DEFAULT_CHECKSUM_ALGORITHM, AwsChunkedWrapper
+from awscli.botocore.utils import is_s3express_bucket
 from s3transfer.compat import SOCKET_ERROR, fallocate, rename_file
 from s3transfer.constants import FULL_OBJECT_CHECKSUM_ARGS
 

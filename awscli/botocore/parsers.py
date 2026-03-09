@@ -128,9 +128,9 @@ import os
 import re
 import struct
 
-from botocore.compat import ETree, XMLParseError
-from botocore.eventstream import EventStream, NoInitialResponseError
-from botocore.utils import (
+from .compat import ETree, XMLParseError
+from .eventstream import EventStream, NoInitialResponseError
+from .utils import (
     CachedProperty,
     ensure_boolean,
     is_json_value_header,

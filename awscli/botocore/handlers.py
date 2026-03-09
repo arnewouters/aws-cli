@@ -24,11 +24,10 @@ import uuid
 import warnings
 from io import BytesIO
 
-import botocore
-import botocore.auth
-from botocore import UNSIGNED, utils
-from botocore.args import ClientConfigString
-from botocore.compat import (
+from . import auth
+from . import UNSIGNED, utils
+from .args import ClientConfigString
+from .compat import (
     MD5_AVAILABLE,  # noqa
     ETree,
     OrderedDict,
@@ -41,26 +40,26 @@ from botocore.compat import (
     urlsplit,
     urlunsplit,
 )
-from botocore.docs.utils import (
+from .docs.utils import (
     AppendParamDocumentation,
     AutoPopulatedParam,
     HideParamFromOperations,
 )
-from botocore.exceptions import (
+from .exceptions import (
     AliasConflictParameterError,
     MissingServiceIdError,  # noqa
     ParamValidationError,
     UnsupportedTLSVersionWarning,
 )
-from botocore.regions import EndpointResolverBuiltins
-from botocore.signers import (
+from .regions import EndpointResolverBuiltins
+from .signers import (
     add_dsql_generate_db_auth_token_methods,
     add_generate_db_auth_token,
     add_generate_presigned_post,
     add_generate_presigned_url,
 )
-from botocore.useragent import register_feature_id
-from botocore.utils import (
+from .useragent import register_feature_id
+from .utils import (
     SAFE_CHARS,
     SERVICE_NAME_ALIASES,
     ArnParser,
@@ -152,7 +151,7 @@ def set_operation_specific_signer(context, signing_name, **kwargs):
     # Auth type will be the string value 'none' if the operation should not
     # be signed at all.
     if auth_type == 'none':
-        return botocore.UNSIGNED
+        return UNSIGNED
 
     if auth_type == 'bearer':
         return 'bearer'
@@ -304,7 +303,7 @@ def disable_signing(**kwargs):
     This handler disables request signing by setting the signer
     name to a special sentinel value.
     """
-    return botocore.UNSIGNED
+    return UNSIGNED
 
 
 def add_expect_header(model, params, **kwargs):
@@ -1227,7 +1226,7 @@ def _set_auth_scheme_preference_signer(context, signing_name, **kwargs):
 
     signature_version_set_in_code = (
         isinstance(signature_version, ClientConfigString)
-        or signature_version is botocore.UNSIGNED
+        or signature_version is UNSIGNED
     )
     auth_preference_set_in_code = isinstance(
         auth_scheme_preference, ClientConfigString
@@ -1247,11 +1246,11 @@ def _set_auth_scheme_preference_signer(context, signing_name, **kwargs):
         and auth_options
     ):
         preferred_schemes = auth_scheme_preference.split(',')
-        resolved = botocore.auth.resolve_auth_scheme_preference(
+        resolved = auth.resolve_auth_scheme_preference(
             preferred_schemes, auth_options
         )
         resolved_signature_version = (
-            botocore.UNSIGNED if resolved == 'none' else resolved
+            UNSIGNED if resolved == 'none' else resolved
         )
 
     # Prefer 'bearer' signature version if a bearer token is available, and it

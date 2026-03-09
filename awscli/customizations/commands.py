@@ -2,9 +2,9 @@ import copy
 import logging
 import os
 
-from botocore import model
-from botocore.compat import OrderedDict
-from botocore.validate import validate_parameters
+from awscli.botocore import model
+from awscli.botocore.compat import OrderedDict
+from awscli.botocore.validate import validate_parameters
 
 import awscli
 from awscli.argparser import ArgTableArgParser, SubCommandArgParser

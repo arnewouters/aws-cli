@@ -46,7 +46,7 @@ Usage:
 import sys
 import time
 
-from botocore.exceptions import ClientError
+from awscli.botocore.exceptions import ClientError
 
 from awscli.customizations.commands import BasicCommand
 from awscli.customizations.ecs.exceptions import MonitoringError

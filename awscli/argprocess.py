@@ -15,8 +15,8 @@
 import logging
 import os
 
-from botocore.compat import OrderedDict, json
-from botocore.utils import is_json_value_header
+from awscli.botocore.compat import OrderedDict, json
+from awscli.botocore.utils import is_json_value_header
 
 from awscli import COMPLEX_TYPES, SCALAR_TYPES, shorthand
 from awscli.utils import (

@@ -15,7 +15,7 @@
 from binascii import crc32
 from struct import unpack
 
-from botocore.exceptions import EventStreamError
+from .exceptions import EventStreamError
 
 # byte length of the prelude (total_length + header_length + prelude_crc)
 _PRELUDE_LENGTH = 12

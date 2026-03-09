@@ -3,11 +3,11 @@
 import os
 import webbrowser
 
-import botocore
+import awscli.botocore as botocore
 from awscrt.crypto import EC, ECType
-from botocore.exceptions import ProfileNotFound
-from botocore.loaders import Loader
-from botocore.utils import (
+from awscli.botocore.exceptions import ProfileNotFound
+from awscli.botocore.loaders import Loader
+from awscli.botocore.utils import (
     JSONFileCache,
     LoginCredentialsLoader,
     get_login_token_cache_directory,

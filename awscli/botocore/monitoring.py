@@ -15,8 +15,8 @@ import logging
 import re
 import time
 
-from botocore.compat import ensure_bytes, ensure_unicode, urlparse
-from botocore.exceptions import (
+from .compat import ensure_bytes, ensure_unicode, urlparse
+from .exceptions import (
     ConnectionClosedError,
     ConnectionError,
     EndpointConnectionError,

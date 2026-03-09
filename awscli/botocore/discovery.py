@@ -14,10 +14,10 @@ import logging
 import time
 import weakref
 
-from botocore import xform_name
-from botocore.exceptions import BotoCoreError, ConnectionError, HTTPClientError
-from botocore.model import OperationNotFoundError
-from botocore.utils import CachedProperty
+from . import xform_name
+from .exceptions import BotoCoreError, ConnectionError, HTTPClientError
+from .model import OperationNotFoundError
+from .utils import CachedProperty
 
 logger = logging.getLogger(__name__)
 

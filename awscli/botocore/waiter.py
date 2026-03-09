@@ -15,10 +15,10 @@ import time
 from functools import partial
 
 import jmespath
-from botocore.context import with_current_context
-from botocore.docs.docstring import WaiterDocstring
-from botocore.useragent import register_feature_id
-from botocore.utils import get_service_module_name
+from .context import with_current_context
+from .docs.docstring import WaiterDocstring
+from .useragent import register_feature_id
+from .utils import get_service_module_name
 
 from . import xform_name
 from .exceptions import ClientError, WaiterConfigError, WaiterError

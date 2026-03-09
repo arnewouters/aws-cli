@@ -18,8 +18,8 @@ import copy
 import logging
 import os
 
-from botocore import utils
-from botocore.exceptions import InvalidConfigError
+from . import utils
+from .exceptions import InvalidConfigError
 
 logger = logging.getLogger(__name__)
 

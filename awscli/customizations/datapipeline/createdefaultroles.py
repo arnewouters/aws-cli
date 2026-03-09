@@ -16,7 +16,7 @@
 import logging
 import warnings
 
-from botocore.exceptions import ClientError
+from awscli.botocore.exceptions import ClientError
 
 from awscli.customizations.commands import BasicCommand
 from awscli.customizations.datapipeline.constants import (

@@ -15,7 +15,7 @@
 # commands.
 import logging
 
-from botocore.utils import ensure_boolean
+from awscli.botocore.utils import ensure_boolean
 from s3transfer.manager import TransferConfig
 
 from awscli.customizations.s3 import constants

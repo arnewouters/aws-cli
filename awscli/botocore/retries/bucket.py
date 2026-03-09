@@ -3,7 +3,7 @@
 import threading
 import time
 
-from botocore.exceptions import CapacityNotAvailableError
+from ..exceptions import CapacityNotAvailableError
 
 
 class Clock:

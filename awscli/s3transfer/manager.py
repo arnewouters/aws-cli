@@ -15,7 +15,7 @@ import logging
 import re
 import threading
 
-from botocore.useragent import register_feature_id
+from awscli.botocore.useragent import register_feature_id
 from s3transfer.bandwidth import BandwidthLimiter, LeakyBucket
 from s3transfer.constants import (
     ALLOWED_DOWNLOAD_ARGS,

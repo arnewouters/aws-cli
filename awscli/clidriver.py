@@ -18,19 +18,19 @@ import platform
 import re
 import sys
 
-import botocore.session
+from awscli.botocore.session import Session as BotocoreSession, get_session
 import distro
-from botocore import xform_name
-from botocore.compat import OrderedDict, copy_kwargs
-from botocore.configprovider import (
+from awscli.botocore import xform_name
+from awscli.botocore.compat import OrderedDict, copy_kwargs
+from awscli.botocore.configprovider import (
     ChainProvider,
     ConstantProvider,
     EnvironmentProvider,
     InstanceVarProvider,
     ScopedConfigProvider,
 )
-from botocore.context import start_as_current_context
-from botocore.history import get_global_history_recorder
+from awscli.botocore.context import start_as_current_context
+from awscli.botocore.history import get_global_history_recorder
 
 from awscli import __version__
 from awscli.alias import AliasCommandInjector, AliasLoader
@@ -113,7 +113,7 @@ def create_clidriver(args=None):
         parser = FirstPassGlobalArgParser()
         args, _ = parser.parse_known_args(args)
         debug = args.debug
-    session = botocore.session.Session()
+    session = BotocoreSession()
     _set_user_agent_for_session(session)
     load_plugins(
         session.full_config.get('plugins', {}),
@@ -240,7 +240,7 @@ class AWSCLIEntryPoint:
 class CLIDriver:
     def __init__(self, session=None, error_handler=None, debug=False):
         if session is None:
-            self.session = botocore.session.get_session()
+            self.session = get_session()
             _set_user_agent_for_session(self.session)
         else:
             self.session = session

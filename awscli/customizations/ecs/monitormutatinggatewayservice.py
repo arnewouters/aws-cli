@@ -42,7 +42,7 @@ import argparse
 import sys
 from urllib.parse import urlparse
 
-from botocore.session import get_session
+from awscli.botocore.session import get_session
 
 from awscli.arguments import CustomArgument
 from awscli.customizations.ecs.monitorexpressgatewayservice import (

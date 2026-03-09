@@ -17,9 +17,9 @@ import logging
 import socket
 import sys
 
-import botocore.utils
+from . import utils
 import urllib3.util
-from botocore.compat import (
+from .compat import (
     HTTPHeaders,
     HTTPResponse,
     MutableMapping,
@@ -27,7 +27,7 @@ from botocore.compat import (
     urlsplit,
     urlunsplit,
 )
-from botocore.exceptions import UnseekableStreamError
+from .exceptions import UnseekableStreamError
 from urllib3.connection import HTTPConnection, VerifiedHTTPSConnection
 from urllib3.connectionpool import HTTPConnectionPool, HTTPSConnectionPool
 
@@ -277,7 +277,7 @@ def prepare_request_dict(
         # NOTE: This is to avoid circular import with utils. This is being
         # done to avoid moving classes to different modules as to not cause
         # breaking chainges.
-        percent_encode_sequence = botocore.utils.percent_encode_sequence
+        percent_encode_sequence = utils.percent_encode_sequence
         encoded_query_string = percent_encode_sequence(r['query_string'])
         if '?' not in url:
             url += f'?{encoded_query_string}'
@@ -421,7 +421,7 @@ class AWSRequestPreparer:
         return body
 
     def _determine_content_length(self, body):
-        return botocore.utils.determine_content_length(body)
+        return utils.determine_content_length(body)
 
 
 class AWSRequest:
@@ -575,7 +575,7 @@ class AWSResponse:
         response content into a proper text type. If the encoding is not
         present in the headers, UTF-8 is used as a default.
         """
-        encoding = botocore.utils.get_encoding_from_headers(self.headers)
+        encoding = utils.get_encoding_from_headers(self.headers)
         if encoding:
             return self.content.decode(encoding)
         else:

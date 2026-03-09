@@ -20,7 +20,7 @@ import re
 import sys
 import xml
 
-from botocore.exceptions import ClientError
+from awscli.botocore.exceptions import ClientError
 
 from awscli.customizations.exceptions import ParamValidationError
 

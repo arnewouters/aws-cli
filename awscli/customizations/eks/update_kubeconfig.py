@@ -13,7 +13,7 @@
 import logging
 import os
 
-from botocore.compat import OrderedDict
+from awscli.botocore.compat import OrderedDict
 
 from awscli.compat import is_windows
 from awscli.customizations.commands import BasicCommand

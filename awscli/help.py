@@ -19,7 +19,7 @@ import tempfile
 import webbrowser
 from subprocess import PIPE, Popen
 
-from botocore.exceptions import ProfileNotFound
+from awscli.botocore.exceptions import ProfileNotFound
 from docutils.core import publish_string
 from docutils.writers import (
     html4css1,

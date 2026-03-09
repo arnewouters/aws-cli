@@ -13,7 +13,7 @@
 import json
 import os
 
-from botocore.model import ServiceModel
+from awscli.botocore.model import ServiceModel
 
 from awscli.customizations.commands import BasicCommand
 

@@ -17,7 +17,7 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 
 import colorama
-from botocore.utils import datetime2timestamp, parse_timestamp
+from awscli.botocore.utils import datetime2timestamp, parse_timestamp
 from dateutil import tz
 
 from awscli.compat import get_stdout_text_writer

@@ -22,7 +22,7 @@ from datetime import datetime, timedelta
 from zlib import error as ZLibError
 
 from awscrt.crypto import RSA, RSASignatureAlgorithm
-from botocore.exceptions import ClientError
+from awscli.botocore.exceptions import ClientError
 from dateutil import parser, tz
 
 from awscli.customizations.cloudtrail.utils import (

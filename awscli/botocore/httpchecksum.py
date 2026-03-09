@@ -26,12 +26,12 @@ from binascii import crc32
 from hashlib import sha1, sha256, sha512
 
 from awscrt import checksums as crt_checksums
-from botocore.compat import urlparse
-from botocore.exceptions import AwsChunkedWrapperError, FlexibleChecksumError
-from botocore.model import StructureShape
-from botocore.response import StreamingBody
-from botocore.useragent import register_feature_id
-from botocore.utils import (
+from .compat import urlparse
+from .exceptions import AwsChunkedWrapperError, FlexibleChecksumError
+from .model import StructureShape
+from .response import StreamingBody
+from .useragent import register_feature_id
+from .utils import (
     determine_content_length,
     get_checksum_algorithm_headers,
     has_checksum_header,

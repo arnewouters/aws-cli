@@ -14,8 +14,8 @@ import uuid
 from enum import Enum
 
 from awscrt.crypto import EC, ECExportFormat, ECType
-from botocore.compat import parse_qsl
-from botocore.useragent import register_feature_id
+from awscli.botocore.compat import parse_qsl
+from awscli.botocore.useragent import register_feature_id
 from dateutil.tz.tz import tzutc
 
 from awscli.botocore.exceptions import (

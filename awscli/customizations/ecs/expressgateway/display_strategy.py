@@ -16,7 +16,7 @@
 import asyncio
 import time
 
-from botocore.exceptions import ClientError
+from awscli.botocore.exceptions import ClientError
 from colorama import Style
 
 from awscli.customizations.ecs.exceptions import MonitoringError

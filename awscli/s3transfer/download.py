@@ -14,7 +14,7 @@ import heapq
 import logging
 import threading
 
-from botocore.exceptions import ClientError
+from awscli.botocore.exceptions import ClientError
 from s3transfer.compat import seekable
 from s3transfer.exceptions import (
     RetriesExceededError,

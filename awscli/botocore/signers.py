@@ -15,18 +15,18 @@ import datetime
 import json
 import weakref
 
-import botocore
-import botocore.auth
-from botocore.awsrequest import create_request_object, prepare_request_dict
-from botocore.compat import OrderedDict
-from botocore.exceptions import (
+from . import UNSIGNED, auth
+from .awsrequest import create_request_object, prepare_request_dict
+from .compat import OrderedDict
+from .exceptions import (
+    NoRegionError,
     ParamValidationError,
     UnknownClientMethodError,
     UnknownSignatureVersionError,
     UnsupportedSignatureVersionError,
 )
-from botocore.tokens import FrozenAuthToken
-from botocore.utils import (
+from .tokens import FrozenAuthToken
+from .utils import (
     ArnParser,
     datetime2timestamp,
     fix_s3_host,  # noqa
@@ -164,7 +164,7 @@ class RequestSigner:
             operation_name=operation_name,
         )
 
-        if signature_version != botocore.UNSIGNED:
+        if signature_version != UNSIGNED:
             kwargs = {
                 'signing_name': signing_name,
                 'region_name': region_name,
@@ -202,7 +202,7 @@ class RequestSigner:
     def _choose_signer(self, operation_name, signing_type, context):
         """
         Allow setting the signature version via the choose-signer event.
-        A value of `botocore.UNSIGNED` means no signing will be performed.
+        A value of `UNSIGNED` means no signing will be performed.
 
         :param operation_name: The operation to sign.
         :param signing_type: The type of signing that the signer is to be used
@@ -221,7 +221,7 @@ class RequestSigner:
         signing_name = signing.get('signing_name', self._signing_name)
         region_name = signing.get('region', self._region_name)
         if (
-            signature_version is not botocore.UNSIGNED
+            signature_version is not UNSIGNED
             and not signature_version.endswith(suffix)
         ):
             signature_version += suffix
@@ -239,7 +239,7 @@ class RequestSigner:
             # The suffix needs to be checked again in case we get an improper
             # signature version from choose-signer.
             if (
-                signature_version is not botocore.UNSIGNED
+                signature_version is not UNSIGNED
                 and not signature_version.endswith(suffix)
             ):
                 signature_version += suffix
@@ -264,13 +264,13 @@ class RequestSigner:
         :type signature_version: string
         :param signature_version: Signature name like ``v4``.
 
-        :rtype: :py:class:`~botocore.auth.BaseSigner`
+        :rtype: :py:class:`~auth.BaseSigner`
         :return: Auth instance to sign a request.
         """
         if signature_version is None:
             signature_version = self._signature_version
 
-        cls = botocore.auth.AUTH_TYPE_MAPS.get(signature_version)
+        cls = auth.AUTH_TYPE_MAPS.get(signature_version)
         if cls is None:
             raise UnknownSignatureVersionError(
                 signature_version=signature_version
@@ -303,7 +303,7 @@ class RequestSigner:
         kwargs['credentials'] = frozen_credentials
         if cls.REQUIRES_REGION:
             if self._region_name is None:
-                raise botocore.exceptions.NoRegionError()
+                raise NoRegionError()
             kwargs['region_name'] = region_name
             kwargs['service_name'] = signing_name
         auth = cls(**kwargs)
@@ -719,7 +719,7 @@ class S3PostPresigner:
         # Create an expiration date for the policy
         datetime_now = datetime.datetime.utcnow()
         expire_date = datetime_now + datetime.timedelta(seconds=expires_in)
-        policy['expiration'] = expire_date.strftime(botocore.auth.ISO8601)
+        policy['expiration'] = expire_date.strftime(auth.ISO8601)
 
         # Append all of the conditions that the user supplied.
         policy['conditions'] = []

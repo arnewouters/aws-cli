@@ -13,9 +13,9 @@
 import json
 import sys
 
-from botocore import xform_name
-from botocore.stub import Stubber
-from botocore.utils import ArgumentGenerator
+from awscli.botocore import xform_name
+from awscli.botocore.stub import Stubber
+from awscli.botocore.utils import ArgumentGenerator
 from ruamel.yaml import YAML
 
 from awscli.clidriver import CLIOperationCaller

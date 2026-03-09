@@ -16,8 +16,8 @@ import threading
 from io import BytesIO
 
 import awscrt.http
-import botocore.awsrequest
-import botocore.session
+from awscli.botocore import awsrequest
+from awscli.botocore import session
 from awscrt.auth import (
     AwsCredentials,
     AwsCredentialsProvider,
@@ -39,12 +39,12 @@ from awscrt.s3 import (
     S3ResponseError,
     get_recommended_throughput_target_gbps,
 )
-from botocore import UNSIGNED
-from botocore.compat import urlsplit
-from botocore.config import Config
-from botocore.exceptions import NoCredentialsError
-from botocore.useragent import register_feature_id
-from botocore.utils import ArnParser, InvalidArnException, is_s3express_bucket
+from awscli.botocore import UNSIGNED
+from awscli.botocore.compat import urlsplit
+from awscli.botocore.config import Config
+from awscli.botocore.exceptions import NoCredentialsError
+from awscli.botocore.useragent import register_feature_id
+from awscli.botocore.utils import ArnParser, InvalidArnException, is_s3express_bucket
 from s3transfer.constants import FULL_OBJECT_CHECKSUM_ARGS, MB
 from s3transfer.exceptions import TransferNotDoneError
 from s3transfer.futures import BaseTransferFuture, BaseTransferMeta
@@ -446,7 +446,7 @@ class BotocoreCRTRequestSerializer(BaseCRTRequestSerializer):
         and any keyword arguments that could be passed to
         `Session.create_client()` when serializing the request.
 
-        :type session: botocore.session.Session
+        :type session: session.Session
 
         :type client_kwargs: Optional[Dict[str, str]])
         :param client_kwargs: The kwargs for the botocore
@@ -545,7 +545,7 @@ class BotocoreCRTRequestSerializer(BaseCRTRequestSerializer):
         parsed['HTTPRequest'] = request.prepare()
 
     def _make_fake_http_response(self, request, **kwargs):
-        return botocore.awsrequest.AWSResponse(
+        return awsrequest.AWSResponse(
             None,
             200,
             {},
@@ -586,7 +586,7 @@ class BotocoreCRTRequestSerializer(BaseCRTRequestSerializer):
             shape = None
 
         response_dict = {
-            'headers': botocore.awsrequest.HeadersDict(headers),
+            'headers': awsrequest.HeadersDict(headers),
             'status_code': status_code,
             'body': s3_response_error.body,
         }

@@ -26,10 +26,10 @@ from enum import Enum
 from string import Formatter
 from typing import NamedTuple
 
-from botocore import xform_name
-from botocore.compat import IPV4_RE, quote, urlparse
-from botocore.exceptions import EndpointResolutionError
-from botocore.utils import (
+from . import xform_name
+from .compat import IPV4_RE, quote, urlparse
+from .exceptions import EndpointResolutionError
+from .utils import (
     ArnParser,
     InvalidArnException,
     is_valid_ipv4_endpoint_url,

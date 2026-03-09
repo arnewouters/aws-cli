@@ -13,28 +13,28 @@
 import functools
 import logging
 
-from botocore import (
+from . import (
     UNSIGNED,  # noqa
     waiter,
     xform_name,
 )
-from botocore.args import ClientArgsCreator
-from botocore.auth import AUTH_TYPE_MAPS, resolve_auth_type
-from botocore.awsrequest import prepare_request_dict
-from botocore.compress import maybe_compress_request
+from .args import ClientArgsCreator
+from .auth import AUTH_TYPE_MAPS, resolve_auth_type
+from .awsrequest import prepare_request_dict
+from .compress import maybe_compress_request
 
 # Keep this imported.  There's pre-existing code that uses
 # "from botocore.client import UNSIGNED".
-from botocore.config import Config
-from botocore.context import with_current_context
-from botocore.credentials import RefreshableCredentials
-from botocore.discovery import (
+from .config import Config
+from .context import with_current_context
+from .credentials import RefreshableCredentials
+from .discovery import (
     EndpointDiscoveryHandler,
     EndpointDiscoveryManager,
     block_endpoint_discovery_required_operations,
 )
-from botocore.docs.docstring import ClientMethodDocstring, PaginatorDocstring
-from botocore.exceptions import (
+from .docs.docstring import ClientMethodDocstring, PaginatorDocstring
+from .exceptions import (
     ClientError,  # noqa
     DataNotFoundError,
     InvalidEndpointDiscoveryConfigurationError,
@@ -42,17 +42,17 @@ from botocore.exceptions import (
     UnknownServiceError,
     UnknownSignatureVersionError,
 )
-from botocore.history import get_global_history_recorder
-from botocore.hooks import first_non_none_response
-from botocore.httpchecksum import (
+from .history import get_global_history_recorder
+from .hooks import first_non_none_response
+from .httpchecksum import (
     apply_request_checksum,
     resolve_checksum_context,
 )
-from botocore.model import ServiceModel
-from botocore.paginate import Paginator
-from botocore.retries import adaptive, standard
-from botocore.useragent import UserAgentString, register_feature_id
-from botocore.utils import (
+from .model import ServiceModel
+from .paginate import Paginator
+from .retries import adaptive, standard
+from .useragent import UserAgentString, register_feature_id
+from .utils import (
     CachedProperty,
     EventbridgeSignerSetter,
     S3ControlArnParamHandlerv2,

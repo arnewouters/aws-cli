@@ -14,14 +14,14 @@ import copy
 from collections import deque
 from pprint import pformat
 
-from botocore.awsrequest import AWSResponse
-from botocore.exceptions import (
+from .awsrequest import AWSResponse
+from .exceptions import (
     ParamValidationError,
     StubAssertionError,
     StubResponseError,
     UnStubbedResponseError,
 )
-from botocore.validate import validate_parameters
+from .validate import validate_parameters
 
 
 class _ANY:

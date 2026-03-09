@@ -13,7 +13,7 @@
 import copy
 import math
 
-from botocore.exceptions import ClientError
+from awscli.botocore.exceptions import ClientError
 from s3transfer.exceptions import S3CopyFailedError
 from s3transfer.tasks import (
     CompleteMultipartUploadTask,

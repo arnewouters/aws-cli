@@ -47,10 +47,10 @@ import re
 import struct
 from xml.etree import ElementTree
 
-from botocore import validate
-from botocore.compat import formatdate, json
-from botocore.useragent import register_feature_id
-from botocore.utils import (
+from . import validate
+from .compat import formatdate, json
+from .useragent import register_feature_id
+from .utils import (
     has_header,
     is_json_value_header,
     parse_to_aware_datetime,

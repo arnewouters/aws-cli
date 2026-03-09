@@ -15,8 +15,8 @@ import random
 import sys
 import time
 
-from botocore.signers import CloudFrontSigner
-from botocore.utils import parse_to_aware_datetime
+from awscli.botocore.signers import CloudFrontSigner
+from awscli.botocore.utils import parse_to_aware_datetime
 
 from awscrt.crypto import RSA, RSASignatureAlgorithm
 

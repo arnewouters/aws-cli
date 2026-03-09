@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 import logging
 
-from botocore import model
+from awscli.botocore import model
 
 from awscli.arguments import BaseCLIArgument
 

@@ -51,15 +51,15 @@ except ImportError:
     # Openssl 1.1.1+ or secure system defaults.
     DEFAULT_CIPHERS = None
 
-import botocore.awsrequest
-from botocore.compat import (
+from . import awsrequest
+from .compat import (
     IPV6_ADDRZ_RE,
     ensure_bytes,
     filter_ssl_warnings,
     unquote,
     urlparse,
 )
-from botocore.exceptions import (
+from .exceptions import (
     ConnectionClosedError,
     ConnectTimeoutError,
     EndpointConnectionError,
@@ -303,8 +303,8 @@ class URLLib3Session:
             proxies=proxies, proxies_settings=proxies_config
         )
         self._pool_classes_by_scheme = {
-            'http': botocore.awsrequest.AWSHTTPConnectionPool,
-            'https': botocore.awsrequest.AWSHTTPSConnectionPool,
+            'http': awsrequest.AWSHTTPConnectionPool,
+            'https': awsrequest.AWSHTTPSConnectionPool,
         }
         if timeout is None:
             timeout = DEFAULT_TIMEOUT
@@ -479,7 +479,7 @@ class URLLib3Session:
                 chunked=self._chunked(request.headers),
             )
 
-            http_response = botocore.awsrequest.AWSResponse(
+            http_response = awsrequest.AWSResponse(
                 request.url,
                 urllib_response.status,
                 urllib_response.headers,

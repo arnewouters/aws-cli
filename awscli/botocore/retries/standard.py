@@ -27,14 +27,14 @@ based API used by botocore.
 import logging
 import random
 
-from botocore.exceptions import (
+from ..exceptions import (
     ConnectionError,
     ConnectTimeoutError,
     HTTPClientError,
     ReadTimeoutError,
 )
-from botocore.retries import quota, special
-from botocore.retries.base import BaseRetryableChecker, BaseRetryBackoff
+from . import quota, special
+from .base import BaseRetryableChecker, BaseRetryBackoff
 
 DEFAULT_MAX_ATTEMPTS = 3
 logger = logging.getLogger(__name__)

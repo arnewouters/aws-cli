@@ -14,9 +14,9 @@ import logging
 import os
 import re
 
-from botocore import xform_name
-from botocore.model import StringShape
-from botocore.utils import is_json_value_header
+from awscli.botocore import xform_name
+from awscli.botocore.model import StringShape
+from awscli.botocore.utils import is_json_value_header
 
 from awscli import SCALAR_TYPES, __version__ as AWS_CLI_VERSION
 from awscli.argprocess import ParamShorthandDocGen

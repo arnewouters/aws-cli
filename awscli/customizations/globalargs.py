@@ -14,9 +14,9 @@ import os
 import sys
 
 import jmespath
-from botocore import UNSIGNED
-from botocore.client import Config
-from botocore.endpoint import DEFAULT_TIMEOUT
+from awscli.botocore import UNSIGNED
+from awscli.botocore.client import Config
+from awscli.botocore.endpoint import DEFAULT_TIMEOUT
 
 from awscli.compat import urlparse
 from awscli.customizations.exceptions import ParamValidationError
