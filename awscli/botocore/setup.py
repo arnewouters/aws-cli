@@ -38,7 +38,7 @@ extras_require = {
 
 setup(
     name='botocore',
-    version=find_version("botocore", "__init__.py"),
+    version=find_version("", "__init__.py"),
     description='Low-level, data-driven core of boto 3.',
     long_description=open('README.rst').read(),
     author='Amazon Web Services',
